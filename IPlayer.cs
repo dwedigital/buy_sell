@@ -6,10 +6,10 @@ namespace buy_sell
     {
         string Name { get; }
         double Balance { get; }
-        List<Commodity> Inventory { get; }
+        Dicitionary<Commodity, int> Inventory { get; }
         // Methods
-        void Buy(List<Commodity> order);
-        List<Commodity> List();
+        void Buy(Dictionary<Commodity, int> commodities);
+        List<Commodity> GetInventory();
         double AddCash(double amount);
 
     }
