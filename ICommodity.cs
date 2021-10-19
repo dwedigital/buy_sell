@@ -5,6 +5,8 @@ namespace buy_sell{
         double Price{get;}
         string Name{get;}
 
+        double VolatilityFactor{get;}
+
         // Methods
         double GetPrice();
 

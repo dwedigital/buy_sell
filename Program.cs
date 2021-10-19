@@ -9,12 +9,12 @@ namespace buy_sell
         static void Main(string[] args)
         {
             ICommodity[] commodities = {
-                new Commodity(0.45,"ETH"),
-                new Commodity(200.50,"BTC"),
-                new Commodity(10.33,"SOL"),
-                new Commodity(5.47,"XRP"),
-                new Commodity(0.45,"DOG"),
-                new Commodity(0.22,"SHIB")
+                new Commodity(0.45,"ETH",1.8),
+                new Commodity(200.50,"BTC",1.2),
+                new Commodity(10.33,"SOL",2.5),
+                new Commodity(5.47,"XRP",3),
+                new Commodity(0.45,"DOG",5),
+                new Commodity(0.22,"SHIB",5)
             };
 
             Person person = CreatePlayer();
