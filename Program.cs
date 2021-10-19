@@ -22,27 +22,30 @@ namespace buy_sell
             while (true)
             {
                 // Create a turn and show menu and take input
-                Console.WriteLine("S: Show prices");
-                Console.WriteLine("L: List owned inventory");
-                Console.WriteLine("M: Show current balance");
-                Console.WriteLine("B: Buy crypto");
-                Console.WriteLine("S: Sell crypto");
-                Console.WriteLine("E: End turn\n"); // trigger event to make price changes
+                Console.WriteLine("TICKER: Show prices");
+                Console.WriteLine("LIST: List owned inventory");
+                Console.WriteLine("BALANCE: Show current balance");
+                Console.WriteLine("BUY: Buy crypto");
+                Console.WriteLine("SELL: Sell crypto");
+                Console.WriteLine("END: End turn\n"); // trigger event to make price changes
                 string input = Console.ReadLine().ToUpper();
 
                 switch (input)
                 {
-                    case "S":
+                    case "TICKER":
                         ListCommodities(commodities);
                         break;
-                    case "L":
+                    case "LIST":
                         ListInventory(person);
                         break;
-                    case "B":
+                    case "BUY":
                         Buy(person, commodities);
                         break;
-                    case "M":
+                    case "BALANCE":
                         ShowBalance(person);
+                        break;
+                    case "SELL":
+                        Sell(person);
                         break;
 
                 }
