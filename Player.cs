@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 namespace buy_sell
 {
-    class Person
+    class Person : IPerson
     {
-        string Name { get; private set; }
+        public string Name { get; private set; }
         public double Balance { get; private set; }
 
-        public Dicitionary<Commodity, int> Inventory { get; private set; }
+        public Dictionary<ICommodity, int> Inventory { get; private set; } = new Dictionary<ICommodity, int>();
 
         public Person(string name, double balance)
         {
@@ -17,19 +18,41 @@ namespace buy_sell
         public double AddCash(double amount)
         {
 
-            return this.balance += amount;
+            return this.Balance += amount;
         }
 
-        public List<Commodity> Buy(Dictionary<Commodity, int> commodities)
+        public Dictionary<ICommodity, int> Buy(Dictionary<ICommodity, int> commodities)
         {
+            if (!this.Inventory.Any())
+            {
+                foreach (KeyValuePair<ICommodity, int> commodity in commodities)
+                {
+                    this.Inventory[commodity.Key] = commodity.Value;
+                    this.Balance = -commodity.Key.Price;
+                }
+
+            }
+            else
+            {
+                foreach (KeyValuePair<ICommodity, int> commodity in commodities)
+                {
+                    this.Inventory[commodity.Key] += commodity.Value;
+                    this.Balance -= commodity.Key.Price;
+                }
+            }
 
 
+            return this.Inventory;
+        }
+
+        // need to create a Sell method
+        public void Sell(Dictionary<string, int> sellOrder){
 
         }
 
-        public List<Commodity> GetInventory()
+        public Dictionary<ICommodity, int> GetInventory()
         {
-            return Inventory;
+            return this.Inventory;
         }
     }
 }

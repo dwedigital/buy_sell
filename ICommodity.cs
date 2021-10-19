@@ -2,13 +2,13 @@ namespace buy_sell{
 
     interface ICommodity
     {
-        double price{get;}
-        string name{get;}
+        double Price{get;}
+        string Name{get;}
 
         // Methods
         double GetPrice();
 
-        void ChangePrice();
+        double ChangePrice(double price);
 
         string Getname();
     }

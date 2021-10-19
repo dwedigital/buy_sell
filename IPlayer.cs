@@ -2,14 +2,16 @@ using System.Collections.Generic;
 
 namespace buy_sell
 {
-    interface Iperson
+    interface IPerson
     {
         string Name { get; }
         double Balance { get; }
-        Dicitionary<Commodity, int> Inventory { get; }
+        Dictionary<ICommodity, int> Inventory { get; }
         // Methods
-        void Buy(Dictionary<Commodity, int> commodities);
-        List<Commodity> GetInventory();
+        Dictionary<ICommodity, int> Buy(Dictionary<ICommodity, int> commodities);
+
+        void Sell(Dictionary<string, int> sellOrder);
+        Dictionary<ICommodity, int> GetInventory();
         double AddCash(double amount);
 
     }
