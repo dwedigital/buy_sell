@@ -115,10 +115,13 @@ namespace buy_sell
             static void Sell(Person person)
             {
 
-                // display current portfolio
-                // ask what they want to sell
-                // how many and check this does not exceed amount the own
-                // call the Sell method on Person class
+                /* 
+                - display current portfolio 
+                - ask what they want to sell
+                - ask how many
+                - check this does not exceed amount the own
+                - call the Sell method on Person class 
+                */
 
             }
         }
