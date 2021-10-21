@@ -28,7 +28,7 @@ namespace buy_sell
                 foreach (KeyValuePair<ICommodity, int> commodity in commodities)
                 {
                     this.Inventory[commodity.Key] = commodity.Value;
-                    this.Balance = -commodity.Key.Price;
+                    this.Balance -= commodity.Key.Price*commodity.Value;
                 }
 
             }
@@ -37,7 +37,7 @@ namespace buy_sell
                 foreach (KeyValuePair<ICommodity, int> commodity in commodities)
                 {
                     this.Inventory[commodity.Key] += commodity.Value;
-                    this.Balance -= commodity.Key.Price;
+                    this.Balance -= commodity.Key.Price*commodity.Value;
                 }
             }
 

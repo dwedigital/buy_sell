@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Sharprompt" Version="2.3.6" />
+  </ItemGroup>
+
 </Project>

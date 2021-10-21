@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Sharprompt;
 namespace buy_sell
 {
     class Program
@@ -19,16 +19,18 @@ namespace buy_sell
 
             Person person = CreatePlayer();
             Console.WriteLine($"Welcome to the DWE Exchange {person.Name}\n");
+            Console.WriteLine("TICKER: Show prices");
+            Console.WriteLine("LIST: List owned inventory");
+            Console.WriteLine("BALANCE: Show current balance");
+            Console.WriteLine("BUY: Buy crypto");
+            Console.WriteLine("SELL: Sell crypto");
+            Console.WriteLine("END: End turn\n");
+            // TODO create random events in-between goes
             while (true)
             {
                 // Create a turn and show menu and take input
-                Console.WriteLine("TICKER: Show prices");
-                Console.WriteLine("LIST: List owned inventory");
-                Console.WriteLine("BALANCE: Show current balance");
-                Console.WriteLine("BUY: Buy crypto");
-                Console.WriteLine("SELL: Sell crypto");
-                Console.WriteLine("END: End turn\n"); // trigger event to make price changes
-                string input = Console.ReadLine().ToUpper();
+                // trigger event to make price changes
+                string input = Prompt.Select("Select your option", new[] { "TICKER", "LIST", "BALANCE", "BUY", "SELL", "END" });
 
                 switch (input)
                 {
@@ -105,12 +107,14 @@ namespace buy_sell
 
                 person.Buy(buyOrder);
                 Console.WriteLine("Order placed");
+                Console.ReadLine();
 
             }
 
             static void ShowBalance(Person person)
             {
                 Console.WriteLine($"{person.Name}'s balance = {person.Balance}");
+                Console.ReadLine();
             }
             static void Sell(Person person)
             {
