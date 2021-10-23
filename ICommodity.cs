@@ -1,16 +1,15 @@
 namespace buy_sell{
 
-    interface ICommodity
+    interface ICoin
     {
         double Price{get;}
         string Name{get;}
-
-        double VolatilityFactor{get;}
+        double Volatility{ get;}
 
         // Methods
         double GetPrice();
 
-        double ChangePrice(double price);
+        double ChangePrice();
 
         string Getname();
     }

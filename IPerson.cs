@@ -6,12 +6,12 @@ namespace buy_sell
     {
         string Name { get; }
         double Balance { get; }
-        Dictionary<ICommodity, int> Inventory { get; }
+        Dictionary<ICoin, int> Inventory { get; }
         // Methods
-        Dictionary<ICommodity, int> Buy(Dictionary<ICommodity, int> commodities);
+        Dictionary<ICoin, int> Buy(ICoin coin, int qty);
 
-        void Sell(Dictionary<ICommodity, int> sellOrder);
-        Dictionary<ICommodity, int> GetInventory();
+        void Sell(Dictionary<ICoin, int> sellOrder);
+        Dictionary<ICoin, int> GetInventory();
         double AddCash(double amount);
 
     }
