@@ -10,7 +10,7 @@ namespace buy_sell
         // Methods
         Dictionary<ICommodity, int> Buy(Dictionary<ICommodity, int> commodities);
 
-        void Sell(Dictionary<string, int> sellOrder);
+        void Sell(Dictionary<ICommodity, int> sellOrder);
         Dictionary<ICommodity, int> GetInventory();
         double AddCash(double amount);
 

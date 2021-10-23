@@ -30,7 +30,14 @@ namespace buy_sell
             {
                 // Create a turn and show menu and take input
                 // trigger event to make price changes
-                string input = Prompt.Select("Select your option", new[] { "TICKER", "LIST", "BALANCE", "BUY", "SELL", "END" });
+                string input = Prompt.Select("Select your option", new[] {
+                    "TICKER",
+                    "LIST",
+                    "BALANCE",
+                    "BUY",
+                    "SELL",
+                    "END"
+                    });
 
                 switch (input)
                 {
@@ -48,6 +55,8 @@ namespace buy_sell
                         break;
                     case "SELL":
                         Sell(person);
+                        break;
+                    case "END":
                         break;
 
                 }
@@ -84,10 +93,9 @@ namespace buy_sell
                 {
                     foreach (KeyValuePair<ICommodity, int> item in inventory)
                     {
-                        Console.WriteLine($"{item.Value} x {item.Key.Name}: {item.Key.Price}");
+                        Console.WriteLine($"{item.Value} x {item.Key.Name}: £{item.Key.Price * item.Value}");
                     }
                 }
-                Console.ReadLine();
             }
 
             static void Buy(Person person, ICommodity[] commodities)
@@ -118,16 +126,51 @@ namespace buy_sell
             }
             static void Sell(Person person)
             {
+                Dictionary<ICommodity, int> sellOrder = new Dictionary<ICommodity, int>();
 
-                /* 
-                - display current portfolio 
-                - ask what they want to sell
-                - ask how many
-                - check this does not exceed amount the own
-                - call the Sell method on Person class 
-                */
+                if (person.Inventory.Count == 0)
+                {
+                    Console.WriteLine("Hey punk, you have nothing to sell!");
+                }
+                else
+                {
+                    ListInventory(person);
+                    Console.WriteLine("What would you like to sell?");
+                    string coin = Console.ReadLine().ToUpper();
+                        Console.WriteLine("How many?");
+                        int amount = Convert.ToInt16(Console.ReadLine());
+
+                        // Run through the user's inventory
+                        foreach (KeyValuePair<ICommodity, int> commodity in person.Inventory)
+                        {
+                            // Check they own the coin
+                            if (commodity.Key.Name == coin)
+                            {
+                                // Check they own enough
+                                if (commodity.Value >= amount)
+                                {
+                                    // Add the coin and the amount to seel to Dictionary
+                                    sellOrder.Add(commodity.Key, amount);
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"You do not have that much of {commodity.Key.Name}, try another amount");
+                                    Console.ReadLine();
+
+                                }
+                                
+                            }else{
+                                Console.WriteLine($"You do not own {commodity.Key.Name}");
+                            }
+                        }
+                        person.Sell(sellOrder);
+                    
+
+                }
 
             }
+
         }
     }
 }
+
