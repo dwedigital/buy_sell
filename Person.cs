@@ -7,7 +7,7 @@ namespace buy_sell
         public string Name { get; private set; }
         public double Balance { get; private set; }
 
-        public Dictionary<ICommodity, int> Inventory { get; private set; }
+        public Dictionary<ICommodity, int> Inventory { get; set; }
 
         public Person(string name, double balance)
         {
@@ -46,8 +46,19 @@ namespace buy_sell
         // need to create a Sell method
         public void Sell(Dictionary<ICommodity, int> sellOrder)
         {
-            foreach (KeyValuePair<ICommodity, int> commodity in sellOrder){
-                System.Console.WriteLine(commodity.Key.Name);
+            foreach (KeyValuePair<ICommodity, int> sellCoin in sellOrder){
+                System.Console.WriteLine(sellCoin.Key.Name);
+
+                foreach (KeyValuePair<ICommodity, int> heldCoin in Inventory){
+                    if(sellCoin.Key.Name == heldCoin.Key.Name){
+                        // TODO need to fix this
+                        this.Inventory[heldCoin.Key] -= sellCoin.Value;
+                        this.Balance += sellCoin.Key.Price * sellCoin.Value;
+                        if(this.Inventory[heldCoin.Key] == 0){
+                            Inventory.Remove(heldCoin.Key);
+                        }
+                    }
+                }
             }
         }
 

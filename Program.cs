@@ -137,34 +137,38 @@ namespace buy_sell
                     ListInventory(person);
                     Console.WriteLine("What would you like to sell?");
                     string coin = Console.ReadLine().ToUpper();
-                        Console.WriteLine("How many?");
-                        int amount = Convert.ToInt16(Console.ReadLine());
+                    Console.WriteLine("How many?");
+                    int amount = Convert.ToInt16(Console.ReadLine());
 
-                        // Run through the user's inventory
-                        foreach (KeyValuePair<ICommodity, int> commodity in person.Inventory)
+                    // Run through the user's inventory
+                    foreach (KeyValuePair<ICommodity, int> commodity in person.Inventory)
+                    {
+                        // Check they own the coin
+                        if (commodity.Key.Name == coin)
                         {
-                            // Check they own the coin
-                            if (commodity.Key.Name == coin)
+                            // Check they own enough
+                            if (commodity.Value >= amount)
                             {
-                                // Check they own enough
-                                if (commodity.Value >= amount)
-                                {
-                                    // Add the coin and the amount to seel to Dictionary
-                                    sellOrder.Add(commodity.Key, amount);
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"You do not have that much of {commodity.Key.Name}, try another amount");
-                                    Console.ReadLine();
-
-                                }
-                                
-                            }else{
-                                Console.WriteLine($"You do not own {commodity.Key.Name}");
+                                // Add the coin and the amount to seel to Dictionary
+                                sellOrder.Add(commodity.Key, amount);
                             }
+                            else
+                            {
+                                Console.WriteLine($"You do not have that much of {commodity.Key.Name}, try another amount");
+                                amount = Convert.ToInt16(Console.ReadLine());
+                                sellOrder.Add(commodity.Key, amount);
+
+                            }
+
                         }
-                        person.Sell(sellOrder);
-                    
+                        else
+                        {
+                            Console.WriteLine($"You do not own {commodity.Key.Name}");
+                        }
+                    }
+                    person.Sell(sellOrder);
+                    ListInventory(person);
+
 
                 }
 
