@@ -1,10 +1,11 @@
-namespace buy_sell{
+namespace buy_sell
+{
 
     interface ICoin
     {
-        double Price{get;}
-        string Name{get;}
-        double Volatility{ get;}
+        double Price { get; }
+        string Name { get; }
+        double Volatility { get; }
 
         // Methods
         double GetPrice();
