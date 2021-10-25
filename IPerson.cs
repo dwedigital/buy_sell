@@ -6,6 +6,9 @@ namespace buy_sell
     {
         string Name { get; }
         double Balance { get; }
+        double StartBalance { get; }
+
+        bool InGame { get; }
         Dictionary<ICoin, int> Inventory { get; }
         // Methods
         Dictionary<ICoin, int> Buy(ICoin coin, int qty);
@@ -13,6 +16,12 @@ namespace buy_sell
         void Sell(Dictionary<ICoin, int> sellOrder);
         Dictionary<ICoin, int> GetInventory();
         double AddCash(double amount);
+
+        void EndRound();
+
+        bool IsAlive();
+
+        double Worth();
 
     }
 }

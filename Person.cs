@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 namespace buy_sell
 {
     class Person : IPerson
     {
         public string Name { get; private set; }
         public double Balance { get; private set; }
+        public double StartBalance { get; private set;}
+
+        public bool InGame { get; private set;} = true;
 
         public Dictionary<ICoin, int> Inventory { get; set; }
 
@@ -13,6 +15,7 @@ namespace buy_sell
         {
             this.Name = name;
             this.Balance = balance;
+            this.StartBalance = balance;
             this.Inventory = new Dictionary<ICoin, int>();
         }
 
@@ -73,6 +76,25 @@ namespace buy_sell
         public Dictionary<ICoin, int> GetInventory()
         {
             return this.Inventory;
+        }
+
+        public void EndRound(){
+            this.Balance -= 20;
+            if(this.Balance<= 0){
+                this.InGame = false;
+            }
+        }
+
+        public bool IsAlive(){
+            return this.InGame;
+        }
+
+        public double Worth(){
+            double portfolioValue=0;
+            foreach (KeyValuePair<ICoin, int> coin in Inventory){
+                portfolioValue += coin.Key.Price * coin.Value;
+            }   
+            return System.Math.Round(portfolioValue+this.Balance,2);
         }
     }
 }

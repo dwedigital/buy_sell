@@ -25,6 +25,9 @@ namespace buy_sell
             Console.WriteLine("BUY: Buy crypto");
             Console.WriteLine("SELL: Sell crypto");
             Console.WriteLine("END: End turn\n");
+
+            int round = 1;
+
             // TODO create random events in-between goes
             while (true)
             {
@@ -36,7 +39,6 @@ namespace buy_sell
                     "BALANCE",
                     "BUY",
                     "SELL",
-                    "TEST",
                     "END"
                     });
 
@@ -59,12 +61,14 @@ namespace buy_sell
                         break;
 
                     case "END":
-                        NewRound(commodities, person);
+                        round++;
+                        NewRound(commodities, person, round);
                         break;
 
                 }
+
             }
-            
+
 
             static void ListCommodities(ICoin[] commodities)
             {
@@ -100,10 +104,10 @@ namespace buy_sell
                 {
                     foreach (KeyValuePair<ICoin, int> item in inventory)
                     {
-                        Console.WriteLine($"{item.Value} x {item.Key.Name}: £{Math.Round(item.Key.Price * item.Value,2)}");
+                        Console.WriteLine($"{item.Value} x {item.Key.Name}: £{Math.Round(item.Key.Price * item.Value, 2)}");
                         portfolioValue += item.Key.Price * item.Value;
                     }
-                    Console.WriteLine($"Portfolio Value: £{Math.Round(portfolioValue,2)}");
+                    Console.WriteLine($"Portfolio Value: £{Math.Round(portfolioValue, 2)}");
                 }
             }
 
@@ -112,15 +116,20 @@ namespace buy_sell
             {
                 Dictionary<ICoin, int> buyOrder = new Dictionary<ICoin, int>();
 
-                    Console.WriteLine("\nWhat coin do you want to buy...");
-                    string coin = Console.ReadLine().ToUpper();
-                    Console.WriteLine("\nEnter the quantity...");
-                    int quantity = Convert.ToInt16(Console.ReadLine());
-                    foreach (ICoin commodity in commodities){
-                        if (commodity.Name == coin){
-                            person.Buy(commodity, quantity);
-                        }
+                Console.WriteLine("\nWhat coin do you want to buy...");
+                string coin = Prompt.Select("Select your option",
+                    // Use Linq to get the name of each coin and convert to an array
+                    commodities.Select(x => x.Name).ToArray()
+                );
+                Console.WriteLine("\nEnter the quantity...");
+                int quantity = Convert.ToInt16(Console.ReadLine());
+                foreach (ICoin commodity in commodities)
+                {
+                    if (commodity.Name == coin)
+                    {
+                        person.Buy(commodity, quantity);
                     }
+                }
                 Console.ReadLine();
 
             }
@@ -128,7 +137,7 @@ namespace buy_sell
 
             static void ShowBalance(Person person)
             {
-                Console.WriteLine($"{person.Name}'s balance = {Math.Round(person.Balance,2)}");
+                Console.WriteLine($"{person.Name}'s balance = {Math.Round(person.Balance, 2)}");
                 Console.ReadLine();
             }
 
@@ -145,7 +154,10 @@ namespace buy_sell
                 {
                     ListInventory(person);
                     Console.WriteLine("What would you like to sell?");
-                    string coin = Console.ReadLine().ToUpper();
+                    string coin = Prompt.Select("Select your option",
+                    // Use Linq to get the name of each coin and convert to an array
+                    person.GetInventory().Select(x => x.Key.Name).ToArray()
+                );
                     Console.WriteLine("How many?");
                     int amount = Convert.ToInt16(Console.ReadLine());
 
@@ -183,11 +195,27 @@ namespace buy_sell
 
             }
 
-            static void NewRound(ICoin[] commodities, Person person){
-                foreach (ICoin coin in commodities){
-                    coin.ChangePrice();
+            static void NewRound(ICoin[] commodities, Person person, int round)
+            {
+
+                person.EndRound();
+                if (person.IsAlive())
+                {
+                    foreach (ICoin coin in commodities)
+                    {
+                        coin.ChangePrice();
+                    }
+
+                    Console.WriteLine($"Round {round}\n");
+                    Console.WriteLine($"Your Current NET Worth - £{person.Worth()} || {(person.Worth() > person.StartBalance ? "+" : "-")}£{(person.Worth() - person.StartBalance < 0 ? (person.Worth() - person.StartBalance) * -1 : person.Worth() - person.StartBalance)}");
+                    ListInventory(person);
+                    round++;
                 }
-                ListInventory(person);
+                else
+                {
+                    Console.WriteLine($"\nThe Crypto World Has You Now... You Have Lost! You lasted {round} rounds");
+                }
+
             }
 
         }
