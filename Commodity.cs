@@ -8,7 +8,7 @@ namespace buy_sell
         public string Name { get; private set; }
         public double Volatility { get; private set; }
 
-        public Coin(double price, string name)
+        public Coin(string name)
         {
             System.Random rand = new Random();
 

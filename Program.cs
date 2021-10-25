@@ -10,11 +10,11 @@ namespace buy_sell
         {
             
             ICoin[] commodities = {
-                new Coin(0.45,"ETH"),
-                new Coin(200.50,"BTC"),
-                new Coin(10.33,"SOL"),
-                new Coin(5.47,"XRP"),
-                new Coin(0.45,"DOG")
+                new Coin("ETH"),
+                new Coin("BTC"),
+                new Coin("SOL"),
+                new Coin("XRP"),
+                new Coin("DOG")
             };
 
             Person person = CreatePlayer();
