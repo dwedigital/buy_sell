@@ -33,7 +33,7 @@ namespace buy_sell
             {
                 // Create a turn and show menu and take input
                 // trigger event to make price changes
-                string input = Prompt.Select("Select your option", new[] {
+                string input = Prompt.Select("\nSelect your option", new[] {
                     "TICKER",
                     "LIST",
                     "BALANCE",
@@ -74,7 +74,7 @@ namespace buy_sell
             {
                 for (int i = 0; i < commodities.Length; i++)
                 {
-                    Console.WriteLine($"{i} - {commodities[i].Name}: £{commodities[i].Price}");
+                    Console.WriteLine($"{i} - {commodities[i].Name}: £{Math.Round(commodities[i].Price,2)}");
                 }
                 Console.ReadLine();
             }
@@ -98,7 +98,7 @@ namespace buy_sell
 
                 if (!inventory.Any())
                 {
-                    Console.WriteLine("No inventory");
+                    Console.WriteLine("\nNo inventory");
                 }
                 else
                 {

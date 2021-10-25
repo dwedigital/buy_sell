@@ -18,7 +18,7 @@ namespace buy_sell
         }
         public double GetPrice()
         {
-            return Price;
+            return Math.Round(Price, 2);
         }
 
         public double ChangePrice()
@@ -26,10 +26,11 @@ namespace buy_sell
             System.Random rand = new Random();
             if (rand.Next(1, 3) == 1)
             {
-                this.Price = (rand.Next(1, 5) * -1) * this.Volatility;
+                this.Price = (rand.Next(1, 3) * -1) * this.Volatility;
                 if (this.Price <= 0)
                 {
-                    this.Price = 0;
+                    this.Price = rand.NextDouble();
+
                     return this.Price;
                 }
                 else
@@ -39,14 +40,7 @@ namespace buy_sell
             }
             else
             {
-                if (this.Price == 0)
-                {
-                    return this.Price = (rand.Next(1, 5) * this.Volatility);
-                }
-                else
-                {
-                    return this.Price = this.Price * (rand.Next(1, 5) * this.Volatility);
-                }
+                return this.Price = this.Price * (rand.Next(1, 5) * this.Volatility);
             }
 
         }
