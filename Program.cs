@@ -33,7 +33,7 @@ namespace buy_sell
             {
                 // Create a turn and show menu and take input
                 // trigger event to make price changes
-                string input = Prompt.Select("\nSelect your option", new[] {
+                string input = Prompt.Select("Select your option", new[] {
                     "TICKER",
                     "LIST",
                     "BALANCE",
