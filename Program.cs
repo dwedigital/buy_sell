@@ -207,7 +207,7 @@ namespace buy_sell
                     }
 
                     Console.WriteLine($"Round {round}\n");
-                    Console.WriteLine($"Your Current NET Worth - £{person.Worth()} || {(person.Worth() > person.StartBalance ? "+" : "-")}£{(person.Worth() - person.StartBalance < 0 ? (person.Worth() - person.StartBalance) * -1 : person.Worth() - person.StartBalance)}");
+                    Console.WriteLine($"Your Current NET Worth - £{person.Worth()} || {(person.Worth() > person.StartBalance ? "+" : "-")}£{(person.Worth() - person.StartBalance < 0 ? (Math.Round(person.Worth() - person.StartBalance,2)) * -1 : Math.Round(person.Worth() - person.StartBalance,2))}");
                     ListInventory(person);
                     round++;
                 }
