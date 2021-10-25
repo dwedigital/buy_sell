@@ -13,7 +13,7 @@ namespace buy_sell
             System.Random rand = new Random();
 
             this.Name = name;
-            this.Price = APICALL.Api(this.Name);
+            this.Price = ApiCall.Api(this.Name);
             // Set a random volatility for each commodity created
             this.Volatility = rand.NextDouble() * 5;
         }

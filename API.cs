@@ -3,7 +3,7 @@ using System.Net;
 using System.Web;
 using Newtonsoft.Json.Linq;
 namespace buy_sell{
-class APICALL
+class ApiCall
 {
   private static string API_KEY = "1a330d54-b0fd-417d-8be0-b383a5517ffd";
 
