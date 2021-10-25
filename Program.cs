@@ -8,7 +8,7 @@ namespace buy_sell
     {
         static void Main(string[] args)
         {
-            
+
             ICoin[] commodities = {
                 new Coin("ETH"),
                 new Coin("BTC"),
@@ -74,7 +74,7 @@ namespace buy_sell
             {
                 for (int i = 0; i < commodities.Length; i++)
                 {
-                    Console.WriteLine($"{i} - {commodities[i].Name}: £{Math.Round(commodities[i].Price,2)}");
+                    Console.WriteLine($"{i} - {commodities[i].Name}: £{Math.Round(commodities[i].Price, 2)}");
                 }
                 Console.ReadLine();
             }
@@ -207,7 +207,7 @@ namespace buy_sell
                     }
 
                     Console.WriteLine($"Round {round}\n");
-                    Console.WriteLine($"Your Current NET Worth - £{person.Worth()} || {(person.Worth() > person.StartBalance ? "+" : "-")}£{(person.Worth() - person.StartBalance < 0 ? (Math.Round(person.Worth() - person.StartBalance,2)) * -1 : Math.Round(person.Worth() - person.StartBalance,2))}");
+                    Console.WriteLine($"Your Current NET Worth - £{person.Worth()} || {(person.Worth() > person.StartBalance ? "+" : "-")}£{(person.Worth() - person.StartBalance < 0 ? (Math.Round(person.Worth() - person.StartBalance, 2)) * -1 : Math.Round(person.Worth() - person.StartBalance, 2))}");
                     ListInventory(person);
                     round++;
                 }
