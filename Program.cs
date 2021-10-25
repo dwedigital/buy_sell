@@ -8,13 +8,13 @@ namespace buy_sell
     {
         static void Main(string[] args)
         {
+            
             ICoin[] commodities = {
                 new Coin(0.45,"ETH"),
                 new Coin(200.50,"BTC"),
                 new Coin(10.33,"SOL"),
                 new Coin(5.47,"XRP"),
-                new Coin(0.45,"DOG"),
-                new Coin(0.22,"SHIB")
+                new Coin(0.45,"DOG")
             };
 
             Person person = CreatePlayer();

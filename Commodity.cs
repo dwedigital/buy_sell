@@ -11,8 +11,9 @@ namespace buy_sell
         public Coin(double price, string name)
         {
             System.Random rand = new Random();
-            this.Price = price;
+
             this.Name = name;
+            this.Price = APICALL.Api(this.Name);
             // Set a random volatility for each commodity created
             this.Volatility = rand.NextDouble() * 5;
         }
