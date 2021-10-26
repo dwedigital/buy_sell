@@ -4,18 +4,16 @@ namespace buy_sell
     class Person : IPerson
     {
         public string Name { get; private set; }
-        public double Balance { get; private set; }
-        public double StartBalance { get; private set; }
+        public double Balance { get; private set; } = 100000;
+        public double StartBalance { get; private set; } = 100000;
 
         public bool InGame { get; private set; } = true;
 
         public Dictionary<ICoin, int> Inventory { get; set; }
 
-        public Person(string name, double balance)
+        public Person(string name)
         {
             this.Name = name;
-            this.Balance = balance;
-            this.StartBalance = balance;
             this.Inventory = new Dictionary<ICoin, int>();
         }
 

@@ -15,7 +15,7 @@ namespace buy_sell
             this.Name = name;
             this.Price = ApiCall.Api(this.Name);
             // Set a random volatility for each commodity created
-            this.Volatility = rand.NextDouble() * 5;
+            this.Volatility = rand.Next(1,4);
         }
         public double GetPrice()
         {
@@ -25,7 +25,7 @@ namespace buy_sell
         public double ChangePrice()
         {
             System.Random rand = new Random();
-            if (rand.Next(1, 3) == 1)
+            if (rand.Next(1, 5) == 1)
             {
                 this.Price = (rand.Next(1, 3) * -1) * this.Volatility;
                 if (this.Price <= 0)
@@ -41,7 +41,7 @@ namespace buy_sell
             }
             else
             {
-                return this.Price = this.Price * (rand.Next(1, 5) * this.Volatility);
+                return this.Price = this.Price * (rand.Next(1, 4) * this.Volatility);
             }
 
         }

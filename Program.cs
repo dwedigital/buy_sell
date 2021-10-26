@@ -84,10 +84,7 @@ namespace buy_sell
             {
                 Console.WriteLine("\nName?");
                 string name = Console.ReadLine();
-                Console.WriteLine("\nOpening balance?");
-                double balance = Convert.ToDouble(Console.ReadLine());
-
-                return new Person(name, balance);
+                return new Person(name);
             }
 
 
